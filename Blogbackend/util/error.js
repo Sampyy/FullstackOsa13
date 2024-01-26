@@ -5,7 +5,7 @@ const errorHandler = (error, request, response, next) => {
     console.log("In TypeError")
     return response
       .status(400)
-      .send({ error: error.errors.map((item) => item.message) })
+      .send({ error: error.message })
   }
   if (error.name === "SequelizeValidationError") {
     console.log("In SequelizeValidationError")
@@ -17,7 +17,7 @@ const errorHandler = (error, request, response, next) => {
     console.log("In SequelizeDatabaseError")
     return response
       .status(400)
-      .send({ error: error.errors.map((item) => item.message) })
+      .send({ error: error.message })
   }
   if (error.name === "SequelizeUniqueConstraintError") {
     console.log("In SequelizeUniqueConstraintError")

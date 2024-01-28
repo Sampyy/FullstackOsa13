@@ -6,6 +6,6 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - /var/lib/postgresql:/var/lib/postgresql
+      - ./postgresdata:/var/lib/postgresql/data/pgdata
     ports:
       - 5433:5432

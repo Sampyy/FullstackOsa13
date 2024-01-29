@@ -45,6 +45,12 @@ const errorHandler = (error, request, response, next) => {
       .status(403)
       .send({ error: "Logged in user is not the owner of the resource" })
   }
+  if (error.name === "ExpiredLoginToken") {
+    console.log("In ExpiredLoginToken")
+    return response
+      .status(403)
+      .send({ error: "Expired login token, please relog" })
+  }
 
   next(error)
 }

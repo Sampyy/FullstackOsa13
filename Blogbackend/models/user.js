@@ -13,6 +13,10 @@ User.init(
       validate: {
         isEmail: true
       }
+    },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      default: false
     }
   },
   { sequelize, underscored: true, modelName: "user" }

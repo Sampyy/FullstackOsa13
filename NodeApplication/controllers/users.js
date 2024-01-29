@@ -59,11 +59,21 @@ router.get("/:id", async (req, res) => {
     ]
   })
 
-  if (user) {
-    res.json(user)
-  } else {
-    res.status(404).end()
+  if (!user) {
+    return res.status(404).end()
   }
+
+  let teams = undefined
+  if (req.query.teams) {
+    teams = await user.getTeams({
+      attributes: ["name"],
+      joinTableAttributes: []
+    })
+  }
+  res.json({
+    ...user.toJSON(),
+    teams
+  })
 })
 
 const isAdmin = async (req, res, next) => {

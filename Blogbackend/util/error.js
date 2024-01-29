@@ -3,9 +3,7 @@ const errorHandler = (error, request, response, next) => {
   console.log(error.name)
   if (error.name === "TypeError") {
     console.log("In TypeError")
-    return response
-      .status(400)
-      .send({ error: error.message })
+    return response.status(400).send({ error: error.message })
   }
   if (error.name === "SequelizeValidationError") {
     console.log("In SequelizeValidationError")
@@ -15,9 +13,7 @@ const errorHandler = (error, request, response, next) => {
   }
   if (error.name === "SequelizeDatabaseError") {
     console.log("In SequelizeDatabaseError")
-    return response
-      .status(400)
-      .send({ error: error.message })
+    return response.status(400).send({ error: error.message })
   }
   if (error.name === "SequelizeUniqueConstraintError") {
     console.log("In SequelizeUniqueConstraintError")
@@ -38,6 +34,16 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "NotBlogsOwnerError") {
     console.log("In NotBlogsOwnerError")
     return response.status(400).send({ error: "Not the owner of the blog" })
+  }
+  if (error.name === "JsonWebTokenError") {
+    console.log("In JsonWebTokenError")
+    return response.status(403).send({ error: "Incorrect token" })
+  }
+  if (error.name === "IncorrectUserError") {
+    console.log("In IncorrectUserError")
+    return response
+      .status(403)
+      .send({ error: "Logged in user is not the owner of the resource" })
   }
 
   next(error)
